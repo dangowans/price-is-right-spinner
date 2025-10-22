@@ -53,7 +53,7 @@ On desktop:
 ## Technical Details
 
 - Pure HTML5, CSS3, and JavaScript
-- Uses Web Audio API for sound generation
+- Uses MP3 sound files (beep, buzzer, and ding-ding-ding) from `/sounds` directory
 - Wake Lock API to prevent screen sleep during gameplay
 - Service Worker for offline functionality
 - Progressive Web App with manifest.json
@@ -74,7 +74,7 @@ python3 -m http.server 8000
 
 Works in all modern browsers that support:
 - CSS3 animations
-- Web Audio API
+- HTML5 Audio (MP3 playback)
 - ES6 JavaScript
 - Service Workers (for PWA features)
 - Wake Lock API (optional, for screen awake feature)

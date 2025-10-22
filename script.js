@@ -27,17 +27,20 @@ const messageText = document.getElementById('message-text');
 const playAgainBtn = document.getElementById('play-again-btn');
 const gameContainer = document.getElementById('game-container');
 
-// Audio context for generating sounds
-let audioContext;
+// Audio elements for sound files
+const beepSound = new Audio('sounds/beep.mp3');
+const buzzerSound = new Audio('sounds/buzzer.mp3');
+const dingDingDingSound = new Audio('sounds/ding-ding-ding.mp3');
 
 // Wake Lock for keeping screen awake
 let wakeLock = null;
 
-// Initialize audio context
+// Initialize audio (preload sounds on first interaction)
 function initAudio() {
-    if (!audioContext) {
-        audioContext = new (window.AudioContext || window.webkitAudioContext)();
-    }
+    // Preload audio files
+    beepSound.load();
+    buzzerSound.load();
+    dingDingDingSound.load();
 }
 
 // Request wake lock to keep screen awake
@@ -70,85 +73,39 @@ async function releaseWakeLock() {
     }
 }
 
-// Sound generation functions
+// Sound playback functions
 function playBeep() {
-    initAudio();
-    const oscillator = audioContext.createOscillator();
-    const gainNode = audioContext.createGain();
-    
-    oscillator.connect(gainNode);
-    gainNode.connect(audioContext.destination);
-    
-    oscillator.frequency.value = 800;
-    oscillator.type = 'sine';
-    
-    gainNode.gain.setValueAtTime(0.3, audioContext.currentTime);
-    gainNode.gain.exponentialRampToValueAtTime(0.01, audioContext.currentTime + 0.1);
-    
-    oscillator.start(audioContext.currentTime);
-    oscillator.stop(audioContext.currentTime + 0.1);
+    // Clone the audio element to allow multiple simultaneous plays
+    const sound = beepSound.cloneNode();
+    sound.volume = 0.5;
+    sound.play().catch(err => console.log('Beep play failed:', err));
 }
 
 function playDing() {
-    initAudio();
-    const oscillator = audioContext.createOscillator();
-    const gainNode = audioContext.createGain();
-    
-    oscillator.connect(gainNode);
-    gainNode.connect(audioContext.destination);
-    
-    oscillator.frequency.value = 1200;
-    oscillator.type = 'sine';
-    
-    gainNode.gain.setValueAtTime(0.4, audioContext.currentTime);
-    gainNode.gain.exponentialRampToValueAtTime(0.01, audioContext.currentTime + 0.3);
-    
-    oscillator.start(audioContext.currentTime);
-    oscillator.stop(audioContext.currentTime + 0.3);
+    // Use the ding-ding-ding sound for compatibility with existing code
+    const sound = dingDingDingSound.cloneNode();
+    sound.volume = 0.5;
+    sound.play().catch(err => console.log('Ding play failed:', err));
 }
 
 function playTripleDing() {
-    initAudio();
-    [0, 0.2, 0.4].forEach(delay => {
-        setTimeout(() => playDing(), delay * 1000);
-    });
+    // Play the ding-ding-ding sound (it already contains three dings)
+    const sound = dingDingDingSound.cloneNode();
+    sound.volume = 0.5;
+    sound.play().catch(err => console.log('Triple ding play failed:', err));
 }
 
 function playBuzzer() {
-    initAudio();
-    const oscillator = audioContext.createOscillator();
-    const gainNode = audioContext.createGain();
-    
-    oscillator.connect(gainNode);
-    gainNode.connect(audioContext.destination);
-    
-    oscillator.frequency.value = 200;
-    oscillator.type = 'sawtooth';
-    
-    gainNode.gain.setValueAtTime(0.5, audioContext.currentTime);
-    gainNode.gain.exponentialRampToValueAtTime(0.01, audioContext.currentTime + 0.8);
-    
-    oscillator.start(audioContext.currentTime);
-    oscillator.stop(audioContext.currentTime + 0.8);
+    const sound = buzzerSound.cloneNode();
+    sound.volume = 0.5;
+    sound.play().catch(err => console.log('Buzzer play failed:', err));
 }
 
 function playBoo() {
-    initAudio();
-    const oscillator = audioContext.createOscillator();
-    const gainNode = audioContext.createGain();
-    
-    oscillator.connect(gainNode);
-    gainNode.connect(audioContext.destination);
-    
-    oscillator.frequency.setValueAtTime(400, audioContext.currentTime);
-    oscillator.frequency.exponentialRampToValueAtTime(200, audioContext.currentTime + 1);
-    oscillator.type = 'sawtooth';
-    
-    gainNode.gain.setValueAtTime(0.3, audioContext.currentTime);
-    gainNode.gain.exponentialRampToValueAtTime(0.01, audioContext.currentTime + 1);
-    
-    oscillator.start(audioContext.currentTime);
-    oscillator.stop(audioContext.currentTime + 1);
+    // Keep using buzzer for the "boo" sound (slow spin)
+    const sound = buzzerSound.cloneNode();
+    sound.volume = 0.3;
+    sound.play().catch(err => console.log('Boo play failed:', err));
 }
 
 // Initialize wheel position
