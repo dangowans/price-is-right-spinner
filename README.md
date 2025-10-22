@@ -5,6 +5,8 @@ A web-based recreation of the iconic Big Wheel from the TV show "The Price is Ri
 ## Features
 
 - **Interactive Spinning Wheel** with 20 numbers (15, 80, 35, 60, 20, 40, 75, 55, 95, 50, 85, 30, 65, 10, 45, 70, 25, 90, 5, 100)
+- **Seamless Number Wrapping** - Numbers wrap smoothly from 100 back to 15
+- **Large, Bold Numbers** - Numbers sized to fill screen width for easy viewing
 - **Color-coded Numbers**:
   - 100: Red text with white borders on black background
   - 5 & 15: Dark green text with black borders on light green background
@@ -22,20 +24,39 @@ A web-based recreation of the iconic Big Wheel from the TV show "The Price is Ri
   - Triple ding for winning (100)
   - Buzzer for going over 100
   - Boo sound for slow/invalid spins
+- **Progressive Web App (PWA)**:
+  - Installable on mobile and desktop
+  - Runs with browser UI hidden
+  - Works offline with service worker caching
+- **Wake Lock** - Keeps screen awake during gameplay
 
 ## How to Play
 
-1. Open `index.html` in a web browser
+1. Open `index.html` in a web browser or install as a PWA
 2. Tap/click anywhere on the screen to start
 3. A power gauge will appear - tap/click again to set spin power
 4. The wheel will spin and beep as numbers pass
 5. After the first spin, choose to "Stay" or "Spin Again"
 6. Try to get exactly 100!
+7. Click "Play Again" to return to the start screen
+
+### Installing as PWA
+
+On mobile devices:
+- **iOS Safari**: Tap the Share button, then "Add to Home Screen"
+- **Android Chrome**: Tap the menu (⋮), then "Add to Home Screen" or "Install app"
+
+On desktop:
+- **Chrome/Edge**: Click the install icon (⊕) in the address bar
+- The app will launch in standalone mode without browser UI
 
 ## Technical Details
 
 - Pure HTML5, CSS3, and JavaScript
 - Uses Web Audio API for sound generation
+- Wake Lock API to prevent screen sleep during gameplay
+- Service Worker for offline functionality
+- Progressive Web App with manifest.json
 - Responsive design
 - No external dependencies
 - Uses the Pricedown font (included in `/pricedown` directory)
@@ -55,6 +76,8 @@ Works in all modern browsers that support:
 - CSS3 animations
 - Web Audio API
 - ES6 JavaScript
+- Service Workers (for PWA features)
+- Wake Lock API (optional, for screen awake feature)
 
 ## License
 

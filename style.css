@@ -74,7 +74,7 @@ body {
     display: flex;
     justify-content: center;
     align-items: center;
-    font-size: 150px;
+    font-size: 220px;
     font-weight: bold;
     background-color: #000;
     position: relative;
@@ -246,6 +246,18 @@ body {
     text-align: center;
     margin-bottom: 40px;
     padding: 40px;
+    animation: pulseMessage 1.5s ease-in-out infinite;
+}
+
+@keyframes pulseMessage {
+    0%, 100% {
+        transform: scale(1);
+        opacity: 1;
+    }
+    50% {
+        transform: scale(1.05);
+        opacity: 0.8;
+    }
 }
 
 .hidden {
@@ -260,7 +272,7 @@ body {
     
     .wheel-segment {
         height: 180px;
-        font-size: 100px;
+        font-size: 140px;
     }
     
     #start-message {
@@ -293,7 +305,7 @@ body {
 @media (max-width: 480px) {
     .wheel-segment {
         height: 150px;
-        font-size: 80px;
+        font-size: 110px;
     }
     
     #start-message {
