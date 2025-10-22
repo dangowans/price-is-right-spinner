@@ -360,11 +360,14 @@ function handleGameClick(event) {
 
 // Reset game
 function resetGame() {
+    // Preserve the current position from the last game
+    const lastPosition = gameState.currentPosition;
+    
     gameState = {
         phase: 'start',
         spinCount: 0,
         totalScore: 0,
-        currentPosition: BUFFER_SEGMENTS,
+        currentPosition: lastPosition,
         isSpinning: false,
         powerLevel: 0
     };
