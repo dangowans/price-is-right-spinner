@@ -33,6 +33,7 @@ let audioContext;
 // Audio elements for message sound files
 const buzzerSound = new Audio('sounds/buzzer.mp3');
 const dingDingDingSound = new Audio('sounds/ding-ding-ding.mp3');
+const applauseSound = new Audio('sounds/applause.mp3');
 
 // Wake Lock for keeping screen awake
 let wakeLock = null;
@@ -46,6 +47,7 @@ function initAudio() {
     // Preload audio files for messages
     buzzerSound.load();
     dingDingDingSound.load();
+    applauseSound.load();
 }
 
 // Request wake lock to keep screen awake
@@ -122,6 +124,12 @@ function playBoo() {
     const sound = buzzerSound.cloneNode();
     sound.volume = 0.3;
     sound.play().catch(err => console.log('Boo play failed:', err));
+}
+
+function playApplause() {
+    const sound = applauseSound.cloneNode();
+    sound.volume = 0.5;
+    sound.play().catch(err => console.log('Applause play failed:', err));
 }
 
 // Initialize wheel position
@@ -271,7 +279,7 @@ function handleSpinComplete() {
     } else if (gameState.spinCount === 2) {
         // Two spins used, game over
         setTimeout(() => {
-            playDing();
+            playApplause();
             showMessage(`You got ${gameState.totalScore}`);
         }, 500);
     } else {
@@ -314,7 +322,7 @@ function showMessage(message) {
 // Handle stay button
 function handleStay() {
     hideActionButtons();
-    playDing();
+    playApplause();
     showMessage(`You got ${gameState.totalScore}`);
 }
 
