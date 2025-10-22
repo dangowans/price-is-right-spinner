@@ -27,18 +27,23 @@ const messageText = document.getElementById('message-text');
 const playAgainBtn = document.getElementById('play-again-btn');
 const gameContainer = document.getElementById('game-container');
 
-// Audio elements for sound files
-const beepSound = new Audio('sounds/beep.mp3');
+// Audio context for generating beep sounds
+let audioContext;
+
+// Audio elements for message sound files
 const buzzerSound = new Audio('sounds/buzzer.mp3');
 const dingDingDingSound = new Audio('sounds/ding-ding-ding.mp3');
 
 // Wake Lock for keeping screen awake
 let wakeLock = null;
 
-// Initialize audio (preload sounds on first interaction)
+// Initialize audio (preload sounds and create audio context on first interaction)
 function initAudio() {
-    // Preload audio files
-    beepSound.load();
+    // Initialize audio context for beep sounds
+    if (!audioContext) {
+        audioContext = new (window.AudioContext || window.webkitAudioContext)();
+    }
+    // Preload audio files for messages
     buzzerSound.load();
     dingDingDingSound.load();
 }
@@ -75,10 +80,21 @@ async function releaseWakeLock() {
 
 // Sound playback functions
 function playBeep() {
-    // Clone the audio element to allow multiple simultaneous plays
-    const sound = beepSound.cloneNode();
-    sound.volume = 0.5;
-    sound.play().catch(err => console.log('Beep play failed:', err));
+    initAudio();
+    const oscillator = audioContext.createOscillator();
+    const gainNode = audioContext.createGain();
+    
+    oscillator.connect(gainNode);
+    gainNode.connect(audioContext.destination);
+    
+    oscillator.frequency.value = 800;
+    oscillator.type = 'sine';
+    
+    gainNode.gain.setValueAtTime(0.3, audioContext.currentTime);
+    gainNode.gain.exponentialRampToValueAtTime(0.01, audioContext.currentTime + 0.1);
+    
+    oscillator.start(audioContext.currentTime);
+    oscillator.stop(audioContext.currentTime + 0.1);
 }
 
 function playDing() {

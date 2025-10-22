@@ -53,7 +53,9 @@ On desktop:
 ## Technical Details
 
 - Pure HTML5, CSS3, and JavaScript
-- Uses MP3 sound files (beep, buzzer, and ding-ding-ding) from `/sounds` directory
+- Hybrid sound system:
+  - Web Audio API for spinner beep sounds (programmatically generated)
+  - MP3 sound files (buzzer and ding-ding-ding) from `/sounds` directory for game messages
 - Wake Lock API to prevent screen sleep during gameplay
 - Service Worker for offline functionality
 - Progressive Web App with manifest.json
@@ -74,7 +76,8 @@ python3 -m http.server 8000
 
 Works in all modern browsers that support:
 - CSS3 animations
-- HTML5 Audio (MP3 playback)
+- Web Audio API (for spinner beeps)
+- HTML5 Audio (MP3 playback for game messages)
 - ES6 JavaScript
 - Service Workers (for PWA features)
 - Wake Lock API (optional, for screen awake feature)
