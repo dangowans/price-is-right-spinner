@@ -30,10 +30,43 @@ const gameContainer = document.getElementById('game-container');
 // Audio context for generating sounds
 let audioContext;
 
+// Wake Lock for keeping screen awake
+let wakeLock = null;
+
 // Initialize audio context
 function initAudio() {
     if (!audioContext) {
         audioContext = new (window.AudioContext || window.webkitAudioContext)();
+    }
+}
+
+// Request wake lock to keep screen awake
+async function requestWakeLock() {
+    try {
+        if ('wakeLock' in navigator) {
+            wakeLock = await navigator.wakeLock.request('screen');
+            console.log('Wake Lock is active');
+            
+            // Re-request wake lock when visibility changes
+            wakeLock.addEventListener('release', () => {
+                console.log('Wake Lock was released');
+            });
+        }
+    } catch (err) {
+        console.error(`${err.name}, ${err.message}`);
+    }
+}
+
+// Release wake lock
+async function releaseWakeLock() {
+    if (wakeLock !== null) {
+        try {
+            await wakeLock.release();
+            wakeLock = null;
+            console.log('Wake Lock released');
+        } catch (err) {
+            console.error(`${err.name}, ${err.message}`);
+        }
     }
 }
 
@@ -313,6 +346,7 @@ function handleGameClick(event) {
     }
     
     initAudio(); // Initialize audio on first interaction
+    requestWakeLock(); // Request wake lock to keep screen awake
     
     if (gameState.phase === 'start') {
         // Hide start message, show power gauge
@@ -357,6 +391,13 @@ gameContainer.addEventListener('click', handleGameClick);
 stayBtn.addEventListener('click', handleStay);
 spinAgainBtn.addEventListener('click', handleSpinAgain);
 playAgainBtn.addEventListener('click', resetGame);
+
+// Re-request wake lock when page becomes visible
+document.addEventListener('visibilitychange', async () => {
+    if (document.visibilityState === 'visible' && gameState.phase !== 'start') {
+        requestWakeLock();
+    }
+});
 
 // Initialize on load
 initWheel();
