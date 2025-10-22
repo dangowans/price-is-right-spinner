@@ -1,7 +1,7 @@
 // Game state
 const WHEEL_VALUES = [15, 80, 35, 60, 20, 40, 75, 55, 95, 50, 85, 30, 65, 10, 45, 70, 25, 90, 5, 100];
 const SEGMENT_HEIGHT = 250; // Height of each wheel segment in pixels
-const BUFFER_SEGMENTS = 3; // Number of duplicate segments at start and end for wrapping
+const BUFFER_SEGMENTS = 5; // Number of duplicate segments at start and end for wrapping
 
 let gameState = {
     phase: 'start', // 'start', 'power-gauge', 'spinning', 'choose-action', 'game-over'
@@ -228,12 +228,13 @@ function spinWheel(power) {
         const totalDOMSegments = WHEEL_VALUES.length + (BUFFER_SEGMENTS * 2);
         let visualPosition = currentSegment;
         
-        // Wrap visual position to keep it within the range of actual DOM segments
+        // Aggressively wrap visual position to keep it well within the range of actual DOM segments
         // This ensures numbers are always visible even during long spins
-        while (visualPosition >= totalDOMSegments) {
+        // Keep position within safe bounds (never reach the edges of buffer)
+        while (visualPosition >= BUFFER_SEGMENTS + WHEEL_VALUES.length) {
             visualPosition -= WHEEL_VALUES.length;
         }
-        while (visualPosition < 0) {
+        while (visualPosition < BUFFER_SEGMENTS) {
             visualPosition += WHEEL_VALUES.length;
         }
         
