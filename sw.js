@@ -1,10 +1,21 @@
-const CACHE_NAME = 'big-wheel-v1';
+const CACHE_NAME = 'big-wheel-v2';
 const urlsToCache = [
   '/',
   '/index.html',
   '/style.css',
   '/script.js',
-  '/pricedown/pricedown%20bl.ttf'
+  '/pricedown/pricedown%20bl.ttf',
+  '/icon-16.png',
+  '/icon-32.png',
+  '/icon-48.png',
+  '/icon-180.png',
+  '/icon-192.png',
+  '/icon-512.png',
+  '/icon-192-maskable.png',
+  '/icon-512-maskable.png',
+  '/apple-touch-icon.png',
+  '/favicon.ico',
+  '/manifest.json'
 ];
 
 // Install event - cache resources
