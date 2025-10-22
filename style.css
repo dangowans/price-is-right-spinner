@@ -61,7 +61,7 @@ body {
 
 #arrow {
     position: absolute;
-    right: 20px;
+    right: 0;
     top: 50%;
     transform: translateY(-50%);
     width: 0;
@@ -316,7 +316,7 @@ body {
     }
     
     #arrow {
-        right: 10px;
+        right: 0;
         border-top: 30px solid transparent;
         border-bottom: 30px solid transparent;
         border-right: 75px solid #ff0000;
@@ -345,7 +345,7 @@ body {
     }
     
     #arrow {
-        right: 5px;
+        right: 0;
         border-top: 25px solid transparent;
         border-bottom: 25px solid transparent;
         border-right: 65px solid #ff0000;
