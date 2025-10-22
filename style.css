@@ -68,7 +68,7 @@ body {
     height: 0;
     border-top: 40px solid transparent;
     border-bottom: 40px solid transparent;
-    border-right: 60px solid #ff0000;
+    border-right: 100px solid #ff0000;
     z-index: 150;
     pointer-events: none;
 }
@@ -319,7 +319,7 @@ body {
         right: 10px;
         border-top: 30px solid transparent;
         border-bottom: 30px solid transparent;
-        border-right: 45px solid #ff0000;
+        border-right: 75px solid #ff0000;
     }
 }
 
@@ -348,6 +348,6 @@ body {
         right: 5px;
         border-top: 25px solid transparent;
         border-bottom: 25px solid transparent;
-        border-right: 40px solid #ff0000;
+        border-right: 65px solid #ff0000;
     }
 }
