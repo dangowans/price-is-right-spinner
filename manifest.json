@@ -2,7 +2,7 @@
   "name": "Price is Right - Big Wheel",
   "short_name": "Big Wheel",
   "description": "Spin the Big Wheel from the Price is Right game show",
-  "start_url": "/",
+  "start_url": "./",
   "display": "standalone",
   "background_color": "#000000",
   "theme_color": "#FFD700",
