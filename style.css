@@ -59,6 +59,20 @@ body {
     overflow: hidden;
 }
 
+#arrow {
+    position: absolute;
+    right: 20px;
+    top: 50%;
+    transform: translateY(-50%);
+    width: 0;
+    height: 0;
+    border-top: 40px solid transparent;
+    border-bottom: 40px solid transparent;
+    border-right: 60px solid #ff0000;
+    z-index: 150;
+    pointer-events: none;
+}
+
 #wheel {
     position: absolute;
     left: 50%;
@@ -300,6 +314,13 @@ body {
     #score-value {
         font-size: 36px;
     }
+    
+    #arrow {
+        right: 10px;
+        border-top: 30px solid transparent;
+        border-bottom: 30px solid transparent;
+        border-right: 45px solid #ff0000;
+    }
 }
 
 @media (max-width: 480px) {
@@ -321,5 +342,12 @@ body {
     .action-btn {
         font-size: 24px;
         padding: 10px 25px;
+    }
+    
+    #arrow {
+        right: 5px;
+        border-top: 25px solid transparent;
+        border-bottom: 25px solid transparent;
+        border-right: 40px solid #ff0000;
     }
 }
