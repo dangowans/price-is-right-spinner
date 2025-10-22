@@ -7,7 +7,7 @@ let gameState = {
     phase: 'start', // 'start', 'power-gauge', 'spinning', 'choose-action', 'game-over'
     spinCount: 0,
     totalScore: 0,
-    currentPosition: BUFFER_SEGMENTS, // Start at position 3 (first real segment after buffer)
+    currentPosition: BUFFER_SEGMENTS, // Start at position 5 (first real segment after buffer)
     isSpinning: false,
     powerLevel: 0
 };
