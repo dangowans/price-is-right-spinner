@@ -1,12 +1,13 @@
 // Game state
 const WHEEL_VALUES = [15, 80, 35, 60, 20, 40, 75, 55, 95, 50, 85, 30, 65, 10, 45, 70, 25, 90, 5, 100];
 const SEGMENT_HEIGHT = 250; // Height of each wheel segment in pixels
+const BUFFER_SEGMENTS = 3; // Number of duplicate segments at start and end for wrapping
 
 let gameState = {
     phase: 'start', // 'start', 'power-gauge', 'spinning', 'choose-action', 'game-over'
     spinCount: 0,
     totalScore: 0,
-    currentPosition: 0, // Current wheel position (0-19)
+    currentPosition: BUFFER_SEGMENTS, // Start at position 3 (first real segment after buffer)
     isSpinning: false,
     powerLevel: 0
 };
@@ -119,7 +120,7 @@ function playBoo() {
 
 // Initialize wheel position
 function initWheel() {
-    // Center the wheel on position 0 (value 15)
+    // Center the wheel on position BUFFER_SEGMENTS (first real segment - value 15)
     const segmentHeight = window.innerWidth <= 768 ? (window.innerWidth <= 480 ? 150 : 180) : 250;
     const offset = -gameState.currentPosition * segmentHeight + (window.innerHeight / 2 - segmentHeight / 2);
     wheel.style.top = `${offset}px`;
@@ -151,8 +152,17 @@ function spinWheel(power) {
     const randomOffset = Math.floor(Math.random() * 5) - 2;
     const finalSegments = segmentsToSpin + randomOffset;
     
-    // Calculate final position
-    const newPosition = (gameState.currentPosition + finalSegments) % WHEEL_VALUES.length;
+    // Calculate final position (accounting for buffer segments)
+    const totalSegments = WHEEL_VALUES.length + (BUFFER_SEGMENTS * 2);
+    let newPosition = gameState.currentPosition + finalSegments;
+    
+    // Wrap position to stay within valid range
+    while (newPosition >= BUFFER_SEGMENTS + WHEEL_VALUES.length) {
+        newPosition -= WHEEL_VALUES.length;
+    }
+    while (newPosition < BUFFER_SEGMENTS) {
+        newPosition += WHEEL_VALUES.length;
+    }
     
     // Animation parameters
     const duration = 3000 + (power * 2000); // 3-5 seconds based on power
@@ -215,7 +225,9 @@ function handleSlowSpin() {
 
 // Handle spin complete
 function handleSpinComplete() {
-    const landedValue = WHEEL_VALUES[gameState.currentPosition];
+    // Get the actual value index (subtract buffer)
+    const valueIndex = (gameState.currentPosition - BUFFER_SEGMENTS) % WHEEL_VALUES.length;
+    const landedValue = WHEEL_VALUES[valueIndex];
     gameState.totalScore += landedValue;
     gameState.spinCount++;
     
@@ -294,7 +306,12 @@ function handleSpinAgain() {
 }
 
 // Handle game container click
-function handleGameClick() {
+function handleGameClick(event) {
+    // Don't handle clicks on buttons
+    if (event.target.tagName === 'BUTTON') {
+        return;
+    }
+    
     initAudio(); // Initialize audio on first interaction
     
     if (gameState.phase === 'start') {
@@ -318,7 +335,7 @@ function resetGame() {
         phase: 'start',
         spinCount: 0,
         totalScore: 0,
-        currentPosition: 0,
+        currentPosition: BUFFER_SEGMENTS,
         isSpinning: false,
         powerLevel: 0
     };

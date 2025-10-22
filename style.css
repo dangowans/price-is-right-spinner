@@ -74,7 +74,7 @@ body {
     display: flex;
     justify-content: center;
     align-items: center;
-    font-size: 150px;
+    font-size: 220px;
     font-weight: bold;
     background-color: #000;
     position: relative;
@@ -260,7 +260,7 @@ body {
     
     .wheel-segment {
         height: 180px;
-        font-size: 100px;
+        font-size: 140px;
     }
     
     #start-message {
@@ -293,7 +293,7 @@ body {
 @media (max-width: 480px) {
     .wheel-segment {
         height: 150px;
-        font-size: 80px;
+        font-size: 110px;
     }
     
     #start-message {
