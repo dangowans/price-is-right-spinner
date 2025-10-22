@@ -1,6 +1,6 @@
 // Game state
 const WHEEL_VALUES = [15, 80, 35, 60, 20, 40, 75, 55, 95, 50, 85, 30, 65, 10, 45, 70, 25, 90, 5, 100];
-const SEGMENT_HEIGHT = 200; // Height of each wheel segment in pixels
+const SEGMENT_HEIGHT = 250; // Height of each wheel segment in pixels
 
 let gameState = {
     phase: 'start', // 'start', 'power-gauge', 'spinning', 'choose-action', 'game-over'
@@ -120,7 +120,8 @@ function playBoo() {
 // Initialize wheel position
 function initWheel() {
     // Center the wheel on position 0 (value 15)
-    const offset = -gameState.currentPosition * SEGMENT_HEIGHT + (window.innerHeight / 2 - SEGMENT_HEIGHT / 2);
+    const segmentHeight = window.innerWidth <= 768 ? (window.innerWidth <= 480 ? 150 : 180) : 250;
+    const offset = -gameState.currentPosition * segmentHeight + (window.innerHeight / 2 - segmentHeight / 2);
     wheel.style.top = `${offset}px`;
 }
 
@@ -136,6 +137,9 @@ function getPowerLevel() {
 // Spin the wheel
 function spinWheel(power) {
     gameState.isSpinning = true;
+    
+    // Get current segment height based on screen size
+    const segmentHeight = window.innerWidth <= 768 ? (window.innerWidth <= 480 ? 150 : 180) : 250;
     
     // Calculate spin distance based on power (minimum 1 full rotation)
     const minRotations = 1.5; // Minimum rotations to be valid
@@ -177,7 +181,7 @@ function spinWheel(power) {
         }
         
         // Update wheel position
-        const offset = -currentSegment * SEGMENT_HEIGHT + (window.innerHeight / 2 - SEGMENT_HEIGHT / 2);
+        const offset = -currentSegment * segmentHeight + (window.innerHeight / 2 - segmentHeight / 2);
         wheel.style.top = `${offset}px`;
         
         if (progress < 1) {
