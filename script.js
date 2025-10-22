@@ -223,8 +223,21 @@ function spinWheel(power) {
             lastBeepSegment = Math.floor(currentSegment);
         }
         
-        // Update wheel position
-        const offset = -currentSegment * segmentHeight + (window.innerHeight / 2 - segmentHeight / 2);
+        // Update wheel position with wrapping
+        // Map the current segment to the actual DOM position to ensure wrapping
+        const totalDOMSegments = WHEEL_VALUES.length + (BUFFER_SEGMENTS * 2);
+        let visualPosition = currentSegment;
+        
+        // Wrap visual position to keep it within the range of actual DOM segments
+        // This ensures numbers are always visible even during long spins
+        while (visualPosition >= totalDOMSegments) {
+            visualPosition -= WHEEL_VALUES.length;
+        }
+        while (visualPosition < 0) {
+            visualPosition += WHEEL_VALUES.length;
+        }
+        
+        const offset = -visualPosition * segmentHeight + (window.innerHeight / 2 - segmentHeight / 2);
         wheel.style.top = `${offset}px`;
         
         if (progress < 1) {

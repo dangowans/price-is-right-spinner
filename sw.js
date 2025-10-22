@@ -1,4 +1,4 @@
-const CACHE_NAME = 'big-wheel-v2';
+const CACHE_NAME = 'big-wheel-v3';
 const urlsToCache = [
   '/',
   '/index.html',
