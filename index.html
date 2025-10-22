@@ -1,0 +1,60 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Price is Right - Big Wheel</title>
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+    <div id="game-container">
+        <div id="score-box" class="hidden">
+            <div id="score-label">Total</div>
+            <div id="score-value">0</div>
+        </div>
+
+        <div id="wheel-container">
+            <div id="wheel">
+                <div class="wheel-segment" data-value="15">15</div>
+                <div class="wheel-segment" data-value="80">80</div>
+                <div class="wheel-segment" data-value="35">35</div>
+                <div class="wheel-segment" data-value="60">60</div>
+                <div class="wheel-segment" data-value="20">20</div>
+                <div class="wheel-segment" data-value="40">40</div>
+                <div class="wheel-segment" data-value="75">75</div>
+                <div class="wheel-segment" data-value="55">55</div>
+                <div class="wheel-segment" data-value="95">95</div>
+                <div class="wheel-segment" data-value="50">50</div>
+                <div class="wheel-segment" data-value="85">85</div>
+                <div class="wheel-segment" data-value="30">30</div>
+                <div class="wheel-segment" data-value="65">65</div>
+                <div class="wheel-segment" data-value="10">10</div>
+                <div class="wheel-segment" data-value="45">45</div>
+                <div class="wheel-segment" data-value="70">70</div>
+                <div class="wheel-segment" data-value="25">25</div>
+                <div class="wheel-segment" data-value="90">90</div>
+                <div class="wheel-segment" data-value="5">5</div>
+                <div class="wheel-segment" data-value="100">100</div>
+            </div>
+        </div>
+
+        <div id="start-message" class="pulsing">Spin the Big Wheel</div>
+
+        <div id="power-gauge" class="hidden">
+            <div id="power-bar"></div>
+        </div>
+
+        <div id="action-buttons" class="hidden">
+            <button id="stay-btn" class="action-btn">Stay</button>
+            <button id="spin-again-btn" class="action-btn">Spin Again</button>
+        </div>
+
+        <div id="message-overlay" class="hidden">
+            <div id="message-text"></div>
+            <button id="play-again-btn" class="action-btn">Play Again</button>
+        </div>
+    </div>
+
+    <script src="script.js"></script>
+</body>
+</html>
