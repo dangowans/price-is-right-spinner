@@ -1,5 +1,7 @@
 # Price is Right - Big Wheel Spinner
 
+![Screenshot](./screenshot.png)
+
 A web-based recreation of the iconic Big Wheel from the TV show "The Price is Right".
 
 ## Features
