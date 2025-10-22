@@ -1,4 +1,4 @@
-const CACHE_NAME = 'big-wheel-v3';
+const CACHE_NAME = 'big-wheel-v4';
 const urlsToCache = [
   './',
   './index.html',
@@ -15,7 +15,10 @@ const urlsToCache = [
   './icon-512-maskable.png',
   './apple-touch-icon.png',
   './favicon.ico',
-  './manifest.json'
+  './manifest.json',
+  './sounds/applause.mp3',
+  './sounds/buzzer.mp3',
+  './sounds/ding-ding-ding.mp3'
 ];
 
 // Install event - cache resources
