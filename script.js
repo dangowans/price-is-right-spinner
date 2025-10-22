@@ -1,13 +1,13 @@
 // Game state
 const WHEEL_VALUES = [15, 80, 35, 60, 20, 40, 75, 55, 95, 50, 85, 30, 65, 10, 45, 70, 25, 90, 5, 100];
 const SEGMENT_HEIGHT = 250; // Height of each wheel segment in pixels
-const BUFFER_SEGMENTS = 5; // Number of duplicate segments at start and end for wrapping
+const BUFFER_SEGMENTS = 8; // Number of duplicate segments at start and end for wrapping
 
 let gameState = {
     phase: 'start', // 'start', 'power-gauge', 'spinning', 'choose-action', 'game-over'
     spinCount: 0,
     totalScore: 0,
-    currentPosition: BUFFER_SEGMENTS, // Start at position 5 (first real segment after buffer)
+    currentPosition: BUFFER_SEGMENTS, // Start at position 8 (first real segment after buffer)
     isSpinning: false,
     powerLevel: 0
 };
